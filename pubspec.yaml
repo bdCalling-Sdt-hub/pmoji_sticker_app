@@ -52,7 +52,7 @@ dependencies:
   shimmer:
   path_provider:
   open_file:
-  image_gallery_saver:
+  image_gallery_saver: 2.0.3
   timeago:
 
 dev_dependencies:

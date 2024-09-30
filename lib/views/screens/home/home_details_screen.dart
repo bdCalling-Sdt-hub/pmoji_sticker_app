@@ -71,6 +71,7 @@ class HomeDetailsScreen extends StatelessWidget {
                            title: AppString.purchaseButton, width: 270.w, onpress: (){
                              List<String> stickersList = ["${allStickerController.singleSticker.value.id}"];
                              paymentController.makePayment(totalAmount: allStickerController.singleSticker.value.price.toString(), stickers: stickersList);
+                             //wishlistController.downloadStickerWithId(allStickerController.singleSticker.value.id.toString());
                             //  StripeService.instance.makePayment();
                             // Get.toNamed(AppRoutes.paymentMethod);
                           },
@@ -80,7 +81,7 @@ class HomeDetailsScreen extends StatelessWidget {
                           loading: allStickerController.isSingleStickerLoading.value,
                           title: "Free Download", width: 270.w, onpress: (){
                          wishlistController.downloadImage(imageUrl: "${ApiConstants.imageBaseUrl}${allStickerController.singleSticker.value.image?.publicFileUrl}");
-
+                         wishlistController.downloadStickerWithId(allStickerController.singleSticker.value.id.toString());
                                              // allStickerController.downloadGallery()
                                              },),
                       ),

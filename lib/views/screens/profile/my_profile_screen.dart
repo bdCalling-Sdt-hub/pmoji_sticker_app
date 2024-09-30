@@ -8,14 +8,17 @@ import '../../../controller/controller.dart';
 import '../../../helpers/helpers.dart';
 import '../../../routes/app_routes.dart';
 import '../../../utils/utils.dart';
-import '../../widgets/custom_loader.dart';
 import '../../widgets/widgets.dart';
 
 class MyProfileScreen extends StatelessWidget {
    MyProfileScreen({super.key});
+
    ProfileController profileController = Get.find<ProfileController>();
+
    LoadingWidget loadingWidget = Get.put(LoadingWidget());
+
    String pfkdhf = "";
+
   @override
   Widget build(BuildContext context) {
     profileController.getUserData();
@@ -25,12 +28,8 @@ class MyProfileScreen extends StatelessWidget {
         title: CustomText(text: AppString.myProfile,fontsize: 18.sp,),),
       body: Obx(() {
         var userData = profileController.getUserDataModel.value;
-
-
-        if (profileController.getUserDataModel == "") {
-          return Center(child: CircularProgressIndicator()); // Show loading
-        }
-        return Container(
+        return  loadingWidget.isLoaded.value ? loadingWidget.loading(context: context, containerHeight: 24,containerWidth: 24, loadedColor: Colors.red)
+            : Container(
           width: double.infinity,
           child: SingleChildScrollView(
             child: Padding(
@@ -213,6 +212,11 @@ class MyProfileScreen extends StatelessWidget {
                                                   profileController.promoCode.value = "";
                                                   await PrefsHelper.remove(
                                                       AppConstants.promoCode);
+                                                  await PrefsHelper.remove(AppConstants.userName);
+                                                  await PrefsHelper.remove(AppConstants.phone);
+                                                  await PrefsHelper.remove(AppConstants.image);
+                                                  await PrefsHelper.remove(AppConstants.email);
+                                                  await PrefsHelper.remove(AppConstants.isLogged);
                                                   Get.offNamed(
                                                       AppRoutes.loginScreen);
                                                 })),

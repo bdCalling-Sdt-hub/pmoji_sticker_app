@@ -115,8 +115,7 @@ class PaymentController {
       if (kDebugMode) {
         print('Payment intent: $paymentIntentData');
       }
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("Paid successfully")));
+      ToastMessageHelper.successMessageShowToster("Paid successfully");
       paymentIntentData = null;
     } catch (e) {
       if (kDebugMode) {
