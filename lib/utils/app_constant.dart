@@ -10,6 +10,7 @@ class AppConstants{
   static String userId = 'id';
   static String userName = 'name';
   static String image = '';
+  static String phone = '';
   static String promoCode = '';
 
   static RegExp emailValidate = RegExp(

@@ -133,15 +133,20 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   hintText: "2972 Westheimer Rd. Santa Ana, Illinois 85486 ",
                 ),
                 SizedBox(height: 250.h,),
-                CustomButtonCommon(title: AppString.updateProfile, onpress: (){
-                  //Get.toNamed(AppRoutes.paymentMethod);
-                  profileController.updateProfile(
-                    image: selectedIMage,
-                    name: nameCtrl.text,
-                    phone: phoneNumberCtrl.text,
-                    address: locationCtrl.text,
-                  );
-                },),
+                Obx(()=>
+            CustomButtonCommon(
+                    loading: profileController.updateProfileLoading.value,
+                    title: AppString.updateProfile, onpress: (){
+                    //Get.toNamed(AppRoutes.paymentMethod);
+                    profileController.updateProfile(
+                      image: selectedIMage,
+                      name: nameCtrl.text,
+                      phone: phoneNumberCtrl.text,
+                      address: locationCtrl.text,
+                    );
+
+                  },),
+                ),
 
               ],
             ),

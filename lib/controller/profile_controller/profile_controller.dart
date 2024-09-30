@@ -17,7 +17,6 @@ class ProfileController extends GetxController {
     getPrivacyData();
     getTermData();
     getAboutData();
-    getProfile();
     super.onInit();
   }
 
@@ -52,16 +51,6 @@ class ProfileController extends GetxController {
 
   var profileData = {}.obs; // Initial profile data
 
-  // Method to fetch profile data from API
-   getProfile() async {
-    try {
-      // Fetch the profile data from your API
-      var data = await getUserData();
-      profileData.value = data; // Update the profile data
-    } catch (e) {
-      print("Error fetching profile data: $e");
-    }
-  }
 
   /// ============get profile=============
   RxBool isProfile = false.obs;
@@ -91,19 +80,15 @@ class ProfileController extends GetxController {
   ///=================Edit Profile===================
   RxBool updateProfileLoading = false.obs;
 
-updateProfile({
-    File? image,
-    String? name, phone, address
+ updateProfile({
+   File? image,
+   String? name,
+   phone, address
   }) async {
     updateProfileLoading(true);
     String token = await PrefsHelper.getString(AppConstants.bearerToken);
     List<MultipartBody> multipartBody =
     image == null ? [] : [MultipartBody("image", image)];
-
-    // var headers = {
-    //   'Content-Type': 'application/json',
-    //   'Authorization': 'Bearer $token'
-    // };
 
     var body = {
       "name": '$name',
@@ -116,10 +101,16 @@ updateProfile({
 
     print("=======> ${response.body}");
     if (response.statusCode == 200 || response.statusCode == 201) {
-      Get.back(result: true);
-     await PrefsHelper.setString(AppConstants.image, response.body['image']["publicFileURL"]);
+      Get.back();
+      await PrefsHelper.setString(AppConstants.userName, response.body['data']['name']);
+      await PrefsHelper.setString(AppConstants.phone, response.body['data']['phone'].toString());
+     await PrefsHelper.setString(AppConstants.image, response.body['data']['image']["publicFileURL"]);
       ToastMessageHelper.successMessageShowToster('Profile Updated Successful');
-      Get.delete(force: true);
+
+      getUserData();
+      update();
+      updateProfileLoading(false);
+    }else{
       updateProfileLoading(false);
     }
   }

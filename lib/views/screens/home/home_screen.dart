@@ -50,16 +50,17 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: false,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 24.w),
-            child: InkWell(
-                onTap: (){
-                  Get.toNamed(AppRoutes.myProfileScreen);
-                },
-                child: Obx(()=> userController.userModel.value.image?.publicFileUrl != null && userController.userModel.value.image?.publicFileUrl != ""
-                    ? CustomImageContainer(height: 44.h,imageBoxFit: BoxFit.cover,imagePath: userController.userModel.value.image?.publicFileUrl,imageWidth: 44.w,isNetworkImage: true, boxShape: BoxShape.circle,)
-                    :CustomImageContainer(height: 44.h,imageBoxFit: BoxFit.cover,imagePath: AppImages.profileImage,imageWidth: 44.w,isNetworkImage: false, boxShape: BoxShape.circle,))),
-          ),
+          leading: Obx(()=>
+            Padding(
+              padding: EdgeInsets.only(left: 24.w),
+              child: InkWell(
+                  onTap: (){
+                    Get.toNamed(AppRoutes.myProfileScreen);
+                  },
+                  child: userController.userModel.value.image?.publicFileUrl != null && userController.userModel.value.image?.publicFileUrl != ""
+                      ? CustomImageContainer(height: 44.h,imageBoxFit: BoxFit.cover,imagePath: userController.userModel.value.image?.publicFileUrl,imageWidth: 44.w,isNetworkImage: true, boxShape: BoxShape.circle,)
+                      :CustomImageContainer(height: 44.h,imageBoxFit: BoxFit.cover,imagePath: AppImages.profileImage,imageWidth: 44.w,isNetworkImage: false, boxShape: BoxShape.circle,))),
+            ),
           title:  Obx(()=> CustomText(text: userController.userModel.value.name ?? "N/A",fontsize: 20.sp,textAlign:TextAlign.start,)),
          actions: [
 
@@ -85,13 +86,27 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           SizedBox(height: 20.h,),
                           ///==============promo code =================
-                          Obx((){
-                            return profileController.promoCode.value == "" ? CustomButtonCommon(
+                        Obx((){
+                            return    profileController.isProfile.value == true ? SizedBox.shrink() : profileController.promoCode.value == "" ? CustomButtonCommon(
                               title: "Add Promo Code",
                               onpress: () {
                                 Get.toNamed(AppRoutes.promoCodeScreen);
                               },
-                            ): const SizedBox.shrink() ;
+                            ):   Container(
+                                width: 355.w,
+                                height: 48.h,
+                                padding:  EdgeInsets.all(10.r),
+                          decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color:AppColors.primaryColor,
+                          ),
+                            child: CustomText(
+                              text: "Download Free Pmoji",
+                              fontsize:  20.sp,
+                              color:  Colors.white,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            );
                           }),
                           SizedBox(height: 20.h,),
                           ///------------------------Search Field----------------------------?>

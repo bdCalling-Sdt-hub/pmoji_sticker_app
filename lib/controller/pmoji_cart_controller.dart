@@ -222,6 +222,15 @@ Future<void> downloadStickerWithId(String id) async {
     for (var imageUrl in imageList) {
       await downloadImage(imageUrl: imageUrl); // Use imageUrl in the downloadImage function
     }
+    for (var sticker in myCartList) {
+      try {
+        await downloadStickerWithId(sticker.id.toString());
+      } catch (e) {
+        print("Error downloading sticker with ID: ${sticker.id}, Error: $e");
+      }
+    }
+
+
     ToastMessageHelper.successMessageShowToster("All Downloads Completed");
   }
 
