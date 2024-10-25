@@ -6,7 +6,8 @@ import 'dart:io';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import '../helpers/helpers.dart';
@@ -201,7 +202,7 @@ Future<void> downloadStickerWithId(String id) async {
      print(res.body);
      if(res.statusCode == 200){
        await file.writeAsBytes(res.bodyBytes);
-       await ImageGallerySaver.saveFile(devicePathToSaveImage);
+       await ImageGallerySaverPlus.saveFile(devicePathToSaveImage);
        ToastMessageHelper.successMessageShowToster("Download Done");
      }
    }catch(e, s){

@@ -37,7 +37,6 @@ void main() async{
   di.dependencies();
   runApp(const MyApp());
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await HiveInitializedController.hiveInitialized();
 }
 
 class MyApp extends StatelessWidget {

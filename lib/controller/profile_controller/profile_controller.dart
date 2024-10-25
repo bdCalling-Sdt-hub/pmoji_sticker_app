@@ -71,7 +71,7 @@ class ProfileController extends GetxController {
       }
     }
     catch(e){
-      ToastMessageHelper.errorMessageShowToster('An error occurred: $e');
+     // ToastMessageHelper.errorMessageShowToster('An error occurred: $e');
       isProfile(false);
     }
   }
