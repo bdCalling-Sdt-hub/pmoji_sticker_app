@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController(text:"info.nurislamrajib@gmail.com");
+    TextEditingController emailController = TextEditingController(text: "info.nurislamrajib@gmail.com");
     TextEditingController passController = TextEditingController(text: "1qazxsw2");
     LoadingWidget loadingWidget = Get.put(LoadingWidget());
     final GlobalKey<FormState> _logKey = GlobalKey<FormState>();

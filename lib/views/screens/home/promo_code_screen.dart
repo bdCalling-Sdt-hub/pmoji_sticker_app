@@ -16,6 +16,7 @@ class PromoCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(title: CustomText(text: AppString.promoCode,fontsize: 18.sp,),),
       body: Container(
         width: double.infinity,
@@ -46,14 +47,18 @@ class PromoCodeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 500.h,),
                   ///----------------------- Payment Purchase Button----------------------------?>
-                  CustomButtonCommon(title: AppString.confirmPurchase,onpress: (){
-                    if(promoKey.currentState!.validate()){
-                      promoCodeController.sendPromoCode(proCode: promoCodeText.text);
-                      Get.toNamed(AppRoutes.congratulationsScreen, arguments: false,preventDuplicates: false);
-                    }
-                   // Get.toNamed(AppRoutes.congratulationsScreen, arguments: false,preventDuplicates: false);
-                    //Get.off(()=>CongratulationsScreen(isPassChange: false,),preventDuplicates: false);
-                  },),
+                  Obx(()=>
+                   CustomButtonCommon(
+                      loading: promoCodeController.isPromoCodeLoading.value == true,
+                      title: AppString.confirmPurchase,onpress: (){
+                      if(promoKey.currentState!.validate()){
+                        promoCodeController.sendPromoCode(proCode: promoCodeText.text);
+
+                      }
+                     // Get.toNamed(AppRoutes.congratulationsScreen, arguments: false,preventDuplicates: false);
+                      //Get.off(()=>CongratulationsScreen(isPassChange: false,),preventDuplicates: false);
+                    },),
+                  ),
                   SizedBox(height: 5.h,),
                 ],
               ),

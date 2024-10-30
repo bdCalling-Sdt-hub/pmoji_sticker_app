@@ -24,7 +24,7 @@ class PmojisCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     profileController.getUserData();
     pmojiCartController.getAllMyPmoji();
-    List <String> stickersList = [];
+    List <String> stickersLists = [];
     return WillPopScope(
       onWillPop: () async{
         return false;
@@ -63,7 +63,7 @@ class PmojisCartScreen extends StatelessWidget {
                               var stickers = snapshot.data!;
 
                               for(var x in stickers){
-                                stickersList.add(x.id.toString());
+                                stickersLists.add(x.id.toString());
                               }
                               return  GridView.builder(
                                 shrinkWrap: true,
@@ -77,7 +77,7 @@ class PmojisCartScreen extends StatelessWidget {
                                 itemCount: stickers.length,
                                 itemBuilder: (context, index) {
                                   var sticker = stickers[index];
-                                  print("===============================stickers list ${stickersList}");
+                                  print("===============================stickers list ${stickersLists}");
 
                                   return Stack(
                                     children: [
@@ -221,7 +221,7 @@ class PmojisCartScreen extends StatelessWidget {
                             :CustomButtonCommon(title: AppString.purchaseButton, onpress: (){
                           paymentController.makePayment(
                                   totalAmount: pmojiCartController.getTotalPriceInt().toString(),
-                                  stickers: stickersList);
+                                  stickers: stickersLists);
 
                         //  Get.toNamed(AppRoutes.paymentMethod);
                         },),

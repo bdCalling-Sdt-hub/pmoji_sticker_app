@@ -54,13 +54,17 @@ RxBool isCartBool = false.obs;
         headers: headers
       );// Passing the ID as an array
       if (response.statusCode == 200 || response.statusCode == 201) {
+        await PrefsHelper.setBool(AppConstants.addCartSuccess, response.body['success']);
         ToastMessageHelper.successMessageShowToster(response.body['message']);
         isCart(false);
       } else {
+        await PrefsHelper.setBool(AppConstants.addCartSuccess, response.body['success']);
         ToastMessageHelper.errorMessageShowToster(response.body['message']);
+
         isCart(false);
       }
     } catch (e) {
+
       ToastMessageHelper.errorMessageShowToster('An error occurred: $e');
       isCart(false);
     }

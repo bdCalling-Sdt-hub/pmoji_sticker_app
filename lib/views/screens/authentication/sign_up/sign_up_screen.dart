@@ -132,14 +132,16 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
 
-                  CustomButtonCommon(
-                    loading: authController.signUpLoading.value,
-                    title: AppString.signUpButton, onpress: (){
-                    if(_fromKey.currentState!.validate()){
-                      authController.signUpHandle();
-                    }
-                  //  Get.off(()=> EmailVerifyScreen(isUpdatePassScreen: false, isSignUpScreen: true,),preventDuplicates:  false);
-                  },),
+                  Obx(()=>
+                 CustomButtonCommon(
+                      loading: authController.signUpLoading.value == true,
+                      title: AppString.signUpButton, onpress: (){
+                      if(_fromKey.currentState!.validate()){
+                        authController.signUpHandle();
+                      }
+                    //  Get.off(()=> EmailVerifyScreen(isUpdatePassScreen: false, isSignUpScreen: true,),preventDuplicates:  false);
+                    },),
+                  ),
                   SizedBox(height: 80.h,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

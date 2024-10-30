@@ -105,6 +105,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 ),
                 SizedBox(height: 20.h,),
                 CustomTextField(
+                  readOnly: true,
                   controller: emailCtrl,
                   prefixIcon: Padding(
                     padding: EdgeInsets.only(left: 16.w, right: 12.w),

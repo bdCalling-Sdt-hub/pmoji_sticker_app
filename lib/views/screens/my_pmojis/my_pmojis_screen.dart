@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/controller.dart';
 import '../../../models/models.dart';
+import '../../../service/service.dart';
 import '../../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
@@ -50,7 +51,7 @@ class MyPmojisScreen extends StatelessWidget {
               //   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               //     return Center(child: Text('No stickers in the cart',style: TextStyle(fontSize: 20,fontFamily: "ComicNeue-Light",fontWeight: FontWeight.w400),)); // Show message if no data is present
               //   } else{
- GridView.builder(
+          GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
@@ -58,16 +59,31 @@ class MyPmojisScreen extends StatelessWidget {
             crossAxisCount: 2, // 2 columns
             crossAxisSpacing: 10.0, // Space between columns
             mainAxisSpacing: 20.0, // Space between rows
+            childAspectRatio: 0.8
           ),
           itemCount: myPmojiController.myPmojiList.length,
           itemBuilder: (context, index) {
             var myPmoji = myPmojiController.myPmojiList[index];
             print(myPmoji.name);
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageContainer(imagePath: "${myPmoji.image?.publicFileURL}", isNetworkImage: true,imageBoxFit: BoxFit.cover,imageWidth: 134.w,height: 134.h,boxShape: BoxShape.rectangle,),
                 SizedBox(height: 12.h),
-                CustomText(text: myPmoji.name ?? "N/A", fontsize: 16.sp,textAlign: TextAlign.center,),
+                CustomText(text: myPmoji.name ?? "N/A", fontsize: 16.sp,textAlign: TextAlign.center,textHeight: 10.h,),
+                SizedBox(height: 4.h),
+                Obx(()=>
+                    CustomButtonCommon(
+                      loading: myPmojiController.isSingleStickerLoading.value,
+                      title: " Download", width: 120.w, onpress: (){
+                      myPmojiController.downloadImage(imageUrl: "${ApiConstants.imageBaseUrl}${myPmojiController.myPmojiList[index].image?.publicFileURL}");
+                      // wishlistController.downloadStickerWithId(allStickerController.singleSticker.value.id.toString());
+                      // allStickerController.downloadGallery()
+                    },),
+                ),
+
+
+
 
               ],
             );

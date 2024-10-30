@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   final LoadingWidget loadingWidget = Get.put(LoadingWidget());
   final ProfileController profileController = Get.put(ProfileController());
    final ScrollController scrollController = ScrollController();
+   final PromoCodeController promoCodeController = PromoCodeController();
    StickerGrid() {
      // Add a listener to the ScrollController to trigger data fetching
      scrollController.addListener(() {
@@ -87,12 +88,20 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(height: 20.h,),
                           ///==============promo code =================
                         Obx((){
-                            return    profileController.isProfile.value == true ? SizedBox.shrink() : profileController.promoCode.value == "" ? CustomButtonCommon(
+                            return    profileController.isProfile.value == true ? Center(
+                                child: loadingWidget.loading(context: context,
+                                    containerHeight: 25.h,
+                                    containerWidth: 25.w,
+                                    loadedColor: AppColors.primaryColor)) : profileController.promoCode.value == "" ? CustomButtonCommon(
                               title: "Add Promo Code",
                               onpress: () {
                                 Get.toNamed(AppRoutes.promoCodeScreen);
                               },
-                            ):   Container(
+                            ):profileController.isProfile.value == true ? Center(
+                                child: loadingWidget.loading(context: context,
+                                    containerHeight: 25.h,
+                                    containerWidth: 25.w,
+                                    loadedColor: AppColors.primaryColor)): Container(
                                 width: 355.w,
                                 height: 48.h,
                                 padding:  EdgeInsets.all(10.r),

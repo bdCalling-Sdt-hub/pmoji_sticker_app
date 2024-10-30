@@ -47,18 +47,20 @@ class EmailVerifyScreen extends StatelessWidget {
 
                 ),
                 SizedBox(height: 24.h,),
-                CustomButtonCommon(
-                  loading:authController.forgotOtpLoading.value ,
-                  title: AppString.verifyButton, onpress: (){
-                  if(Get.parameters['screenType'] == 'forgot'){
-                   authController.forgotOtpVerify(picController.text);
-                   // Get.toNamed(AppRoutes.setNewPasswordScreen);
-                  } else{
-                    authController.otpVerify(picController.text);
-                  }
+                Obx(()=>
+                   CustomButtonCommon(
+                    loading:authController.verifyLoading.value == true,
+                    title: AppString.verifyButton, onpress: (){
+                    if(Get.parameters['screenType'] == 'forgot'){
+                     authController.forgotOtpVerify(picController.text);
+                     // Get.toNamed(AppRoutes.setNewPasswordScreen);
+                    } else{
+                      authController.otpVerify(picController.text);
+                    }
 
-                //  isSignUpScreen == true ? Get.toNamed(AppRoutes.loginScreen):Get.toNamed(AppRoutes.setNewPasswordScreen) ;
-                },),
+                  //  isSignUpScreen == true ? Get.toNamed(AppRoutes.loginScreen):Get.toNamed(AppRoutes.setNewPasswordScreen) ;
+                  },),
+                ),
               ],
             ),
           ),

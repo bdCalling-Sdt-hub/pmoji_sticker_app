@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 
 import '../helpers/helpers.dart';
+import '../routes/app_routes.dart';
 import '../service/service.dart';
 import '../utils/utils.dart';
 
@@ -44,9 +45,12 @@ RxString promoCode = "".obs;
       promoCode.value = response.body['data']['promoCode'];
       print(promoCode.value);
       ToastMessageHelper.successMessageShowToster(response.body['message']);
+      Get.toNamed(AppRoutes.congratulationsScreen, arguments: false,preventDuplicates: false);
+
+
       isPromoCodeLoading(false);
     }else{
-      // ToastMessageHelper.errorMessageShowToster(response.body['message']);
+      ToastMessageHelper.errorMessageShowToster(response.body['message']);
       isPromoCodeLoading(false);
     }
   }
