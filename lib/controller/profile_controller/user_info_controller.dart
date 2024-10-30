@@ -5,6 +5,7 @@ import '../../models/user_info_response_model.dart';
 import '../../service/service.dart';
 
 class UserController extends GetxController{
+
   @override
   void onInit() {
     getUserData();

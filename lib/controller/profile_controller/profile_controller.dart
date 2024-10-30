@@ -83,7 +83,8 @@ class ProfileController extends GetxController {
  updateProfile({
    File? image,
    String? name,
-   phone, address
+  String? phone,
+  String? address
   }) async {
     updateProfileLoading(true);
     String token = await PrefsHelper.getString(AppConstants.bearerToken);
@@ -96,7 +97,8 @@ class ProfileController extends GetxController {
       "phone": '$phone',
     };
     var response = await ApiClient.postMultipartData(
-        ApiConstants.updateProfileEndPoint, body,
+        ApiConstants.updateProfileEndPoint,
+        body,
         multipartBody: multipartBody);
 
     print("=======> ${response.body}");

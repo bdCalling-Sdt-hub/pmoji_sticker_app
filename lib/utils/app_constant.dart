@@ -7,6 +7,7 @@ class AppConstants{
   static String bearerToken = 'token';
   static String email = 'email';
   static String isLogged = 'true';
+  static String addCartSuccess = 'true';
   static String userId = 'id';
   static String userName = 'name';
   static String image = '';

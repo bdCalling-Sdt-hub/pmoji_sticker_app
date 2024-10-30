@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/controller.dart';
 import '../../../controller/payment_controller.dart';
+import '../../../helpers/prefs_helper.dart';
 import '../../../payment_controller.dart';
 import '../../../service/service.dart';
 import '../../../utils/utils.dart';
@@ -16,11 +17,12 @@ class HomeDetailsScreen extends StatelessWidget {
    final AllStickerController allStickerController = Get.put(AllStickerController());
    final LoadingWidget loadingWidget = Get.put(LoadingWidget());
   final PmojiCartController wishlistController = Get.put(PmojiCartController());
-
+   RxBool isCart = false.obs;
    PaymentController paymentController = PaymentController() ;
+   final isFeatureEnabled = false.obs;
   @override
   Widget build(BuildContext context) {
-
+    _getFeatureEnabledStatus();
   allStickerController.getSingleSticker(id: Get.parameters['id']!);
     return Scaffold(
       appBar: AppBar(title: Obx(()=> CustomText(text: allStickerController.singleSticker.value.name ?? "N/A",fontsize: 18.sp,)),),
@@ -53,15 +55,16 @@ class HomeDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Obx((){
+                      Obx(() {
                         var sticker = allStickerController.singleSticker.value;
-                        bool isCart = wishlistController.isInWishlist(sticker);
+                        RxBool isCart = false.obs;
                         return InkWell(
-                            onTap: (){
+                            onTap: () async{
+                              isCart.value = !isCart.value;
                               wishlistController.saveStickerWithId(sticker.id.toString());
 
                             },
-                            child: SvgPicture.asset(isCart == true ? AppIcons.soppingCart1: AppIcons.soppingCart, height: 48.h, width: 48.w,));
+                            child: SvgPicture.asset( isCart.value == false ? AppIcons.soppingCart1: AppIcons.soppingCart, height: 48.h, width: 48.w,));
 
                       }),
                      Get.arguments == "" ?
@@ -95,4 +98,8 @@ class HomeDetailsScreen extends StatelessWidget {
       ),
     );
   }
+   void _getFeatureEnabledStatus() async {
+   bool featureEnabled = await PrefsHelper.getBool(AppConstants.addCartSuccess); // Retrieve bool from SharedPreferences
+   isFeatureEnabled.value = featureEnabled;
+   }
 }

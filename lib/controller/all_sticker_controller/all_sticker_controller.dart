@@ -2,6 +2,7 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../helpers/helpers.dart';
@@ -26,6 +27,12 @@ class AllStickerController extends GetxController {
     super.onInit();
      getAllSticker();
      getAllMyPmoji();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    myPmojiList.clear();
   }
   //
   // ///============== Sticker List =================<>
@@ -131,6 +138,37 @@ RxBool isSingleStickerLoading = false.obs;
       isMyPmojiLoading(false);
     }
   }
+
+
+  ///============download galary=================
+  Future<void> downloadImage({required String imageUrl}) async {
+    try{
+      String  devicePathToSaveImage= "";
+      var time = DateTime.now().microsecondsSinceEpoch;
+      if(Platform.isAndroid){
+        devicePathToSaveImage = "/storage/emulated/0/Pictures/PmojiGallery$time.svg";
+      }else{
+        var downloadDirectoryPath = await getApplicationCacheDirectory();
+        devicePathToSaveImage = "${downloadDirectoryPath}/PmojiGallery$time.svg";
+      }
+
+      File file  = File(devicePathToSaveImage);
+      print(file);
+      print("***************${imageUrl}");
+
+      var res = await http.get(Uri.parse("$imageUrl"));
+      print(res.body);
+      if(res.statusCode == 200){
+        await file.writeAsBytes(res.bodyBytes);
+        await ImageGallerySaverPlus.saveFile(devicePathToSaveImage);
+        ToastMessageHelper.successMessageShowToster("Download Done");
+      }
+    }catch(e, s){
+      print("${e}");
+      print("${s}");
+    }
+  }
+
 
 
 
