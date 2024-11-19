@@ -12,7 +12,7 @@ class ApiConstants{
 
 
 
-  static const String allStickerEndPoint = "/sticker/all";
+  static  String allStickerEndPoint() => "/sticker/all?limit=100";
   static String singleStickerEndPoint(String id) => "/sticker/sticker-detail?id=$id";
 
   static const String userMoreInformationEndPoint = "/user/information";
