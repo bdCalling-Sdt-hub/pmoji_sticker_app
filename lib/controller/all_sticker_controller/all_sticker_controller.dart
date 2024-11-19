@@ -355,7 +355,7 @@ class AllStickerController extends GetxController {
   var filteredList = <AllStickerResponseModel>[].obs;
   getAllSticker() async {
     isStickerLoading(true);
-    var response = await ApiClient.getData(ApiConstants.allStickerEndPoint);
+    var response = await ApiClient.getData(ApiConstants.allStickerEndPoint());
     if (response.statusCode == 200 || response.statusCode == 201) {
       var responseData = response.body;
       stickerList.value = List<AllStickerResponseModel>.from(
