@@ -14,7 +14,7 @@ class AppRoutes {
   static const String setNewPasswordScreen = "/setNewPassword.dart";
   static const String homeScreen = "/homeScreen.dart";
   static const String homeDetailsScreen = "/homeDetailsScreen.dart";
-  static const String notification = "/notification.dart";
+  static const String notificationScreen = "/notification.dart";
   static const String paymentMethod = "/paymentMethod.dart";
   static const String promoCodeScreen = "/promoCodeScreen.dart";
   static const String congratulationsScreen = "/congratulationsScreen.dart";
@@ -39,7 +39,7 @@ class AppRoutes {
          GetPage(name: setNewPasswordScreen, page: () =>  SetNewPasswordScreen()),
          GetPage(name: homeScreen, page: () =>  HomeScreen()),
          GetPage(name: homeDetailsScreen, page: () =>   HomeDetailsScreen()),
-         GetPage(name: notification, page: () =>  NotificationScreen()),
+         GetPage(name: notificationScreen, page: () =>  NotificationScreen()),
          GetPage(name: paymentMethod, page: () => const  PaymentScreen()),
          GetPage(name: promoCodeScreen, page: () =>   PromoCodeScreen()),
          GetPage(name: congratulationsScreen, page: () =>  CongratulationsScreen(isPassChange: Get.arguments ?? true,)),

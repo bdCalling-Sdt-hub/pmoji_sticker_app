@@ -367,7 +367,7 @@ class HomeScreen extends StatelessWidget {
 
             InkWell(
               onTap: (){
-                Get.toNamed(AppRoutes.notification);
+                Get.toNamed(AppRoutes.notificationScreen);
               },
               child: Padding(
                 padding: EdgeInsets.only(right: 24.w),
@@ -466,7 +466,7 @@ class HomeScreen extends StatelessWidget {
                           containerHeight: 25.h,
                           containerWidth: 25.w,
                           loadedColor: AppColors.primaryColor))
-                      :
+                      : allStickerController.filteredList.isEmpty ? Center(child: CustomText(text: "No Data Available",),):
                   GridView.builder(
                     controller: scrollController,
                     shrinkWrap: true,

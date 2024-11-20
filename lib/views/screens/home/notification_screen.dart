@@ -11,23 +11,47 @@ import '../../../utils/utils.dart';
 import '../../widgets/custom_loader.dart';
 import '../../widgets/widgets.dart';
 import 'package:timeago/timeago.dart' as TimeAgo;
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
    NotificationScreen({super.key});
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
    NotificationController notificationController = Get.put(NotificationController());
+   ScrollController scrollController = ScrollController();
+   void initState() {
+     super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) async {
+       await notificationController.getNotificationData();
+       scrollController.addListener(() {
+         if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+           notificationController.loadMore();
+           print("load more true");
+         }
+       });
+     });
+   }
 
-
+   @override
+   void dispose() {
+     super.dispose();
+    scrollController.dispose();
+     notificationController.page.value = 1;
+   }
 
   @override
   Widget build(BuildContext context) {
-    notificationController.getNotificationData();
+
     return Scaffold(
       appBar: AppBar(title: CustomText(text: AppString.notification,fontsize: 18.sp,),),
       body: Obx(()=>
-         Container(
+      notificationController.isNotiLoading.value? CustomLoader(): notificationController.notificationList.isEmpty? Center(child: Text("No Data Available")) : Container(
           width: double.infinity,
           child: ListView.builder(
             shrinkWrap: true,
-            controller: notificationController.scrollController,
+            controller: scrollController,
             itemCount: notificationController.notificationList.length +1,
             itemBuilder: (context, index) {
               if(index < notificationController.notificationList.length){
@@ -72,6 +96,7 @@ class NotificationScreen extends StatelessWidget {
       ),
     );
   }
+
    String formatTime(String? dateTimeString) {
      DateTime dateTime = DateTime.parse(dateTimeString!);
      // Format the time as desired
