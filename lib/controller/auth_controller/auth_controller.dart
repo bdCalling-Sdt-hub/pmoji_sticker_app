@@ -119,8 +119,9 @@ loginHandle(String email, String password) async{
        ToastMessageHelper.successMessageShowToster(response.body['message']);
        loadingLoading(false);
      }else{
-       ToastMessageHelper.errorMessageShowToster(response.body['message']);
        loadingLoading(false);
+       ToastMessageHelper.errorMessageShowToster(response.body['message']);
+
      }
 }
 

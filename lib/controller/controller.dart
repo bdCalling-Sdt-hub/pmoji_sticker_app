@@ -5,4 +5,4 @@ export 'all_sticker_controller/all_sticker_controller.dart';
 export 'profile_controller/user_info_controller.dart';
 export 'pmoji_cart_controller.dart';
 export 'promo_code_controller.dart';
-export 'notification/notification.dart';
+export 'notification/notification_controller.dart';
