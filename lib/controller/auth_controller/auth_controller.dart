@@ -41,6 +41,7 @@ class AuthController extends GetxController{
     if(response.statusCode == 200 || response.statusCode == 201){
       var data = response.body['data'];
      await PrefsHelper.setString(AppConstants.bearerToken, data['token']);
+     await PrefsHelper.setString(AppConstants.email, emailController.text);
       print("pritn tokkkkken :: ${data['token']}");
       Get.toNamed(AppRoutes.emailVerifyScreen, parameters: {
         'email':emailController.text
@@ -187,17 +188,16 @@ resendOTP(String email) async{
 
   ///===========Otp Verify===========<>
   RxBool forgotOtpLoading = false.obs;
-  forgotOtpVerify(String forgotOtp,) async{
+  forgotOtpVerify(String forgotOtp, String email) async{
     forgotOtpLoading(true);
     String bearerToken = await  PrefsHelper.getString(AppConstants.bearerToken);
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $bearerToken'
     };
     var body = {
       "otp": forgotOtp,
     };
-    var response = await ApiClient.postData("/user/verify-forget-otp",
+    var response = await ApiClient.postData("/user/verify-forget-otp?email=$email",
         jsonEncode(body),
         headers: headers
     );
@@ -229,14 +229,14 @@ resendOTP(String email) async{
     String bearerToken = await  PrefsHelper.getString(AppConstants.bearerToken);
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $bearerToken'
+      // 'Authorization': 'Bearer $bearerToken'
     };
     var body = {
       "password":firstController,
       "confirmPassword":secondController
     };
     
-    var response = await ApiClient.postData(ApiConstants.resetPassEndPoint, jsonEncode(body),headers: headers);
+    var response = await ApiClient.postData("${ApiConstants.resetPassEndPoint}?email=${emailController.text}", jsonEncode(body),headers: headers);
 
     if(response.statusCode == 200 || response.statusCode == 201){
       ToastMessageHelper.successMessageShowToster(response.body['message']);

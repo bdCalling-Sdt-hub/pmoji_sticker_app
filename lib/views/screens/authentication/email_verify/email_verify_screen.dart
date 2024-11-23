@@ -52,7 +52,8 @@ class EmailVerifyScreen extends StatelessWidget {
                     loading:authController.verifyLoading.value == true,
                     title: AppString.verifyButton, onpress: (){
                     if(Get.parameters['screenType'] == 'forgot'){
-                     authController.forgotOtpVerify(picController.text);
+                     authController.forgotOtpVerify(picController.text,authController.emailController.text);
+                     print("email controller: ${authController.emailController.text}");
                      // Get.toNamed(AppRoutes.setNewPasswordScreen);
                     } else{
                       authController.otpVerify(picController.text);

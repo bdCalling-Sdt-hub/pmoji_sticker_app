@@ -22,13 +22,13 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   void initState(){
-    emailController.text = Get.parameters['email'] ?? '';
+    authController.emailController.text = Get.parameters['email'] ?? '';
     super.initState();
   }
 
   final GlobalKey<FormState> forgotKey = GlobalKey<FormState>();
   AuthController authController = Get.find<AuthController>();
-  TextEditingController emailController =TextEditingController();
+  //TextEditingController emailController =TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   CustomText(text: AppString.enterForgotEmail,fontsize: 20.sp,),
                   SizedBox(height: 24.h,),
                   CustomTextField(
-                    controller: emailController,
+                    controller:  authController.emailController,
                     hintText: AppString.enterYourEmail,
                     borderColor: AppColors.primaryColor,
                     prefixIcon: Padding(
@@ -64,15 +64,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     },
                   ),
                   SizedBox(height: 24.h,),
-                  CustomButtonCommon(
-                    loading: authController.forgotLogin.value,
-                    title: AppString.sendOTP, onpress: (){
-                    if(forgotKey.currentState!.validate()){
-                      authController.forgotHandle(emailController.text, "forgot");
-                    }
-                   // Get.off(()=> EmailVerifyScreen(isUpdatePassScreen: true, isSignUpScreen: false,),preventDuplicates:  false);
-                  // Get.toNamed(AppRoutes.emailVerifyScreen, );
-                  },),
+                  Obx(()=>
+                   CustomButtonCommon(
+                      loading: authController.forgotLogin.value,
+                      title: AppString.sendOTP, onpress: (){
+                      if(forgotKey.currentState!.validate()){
+                        authController.forgotHandle( authController.emailController.text, "forgot");
+                      }
+                     // Get.off(()=> EmailVerifyScreen(isUpdatePassScreen: true, isSignUpScreen: false,),preventDuplicates:  false);
+                    // Get.toNamed(AppRoutes.emailVerifyScreen, );
+                    },),
+                  ),
                 ],
               ),
             ),

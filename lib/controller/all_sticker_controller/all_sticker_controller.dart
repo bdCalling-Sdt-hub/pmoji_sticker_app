@@ -325,9 +325,9 @@ import '../../models/single_sticker_model.dart';
 import '../../service/service.dart';
 
 class AllStickerController extends GetxController {
-  RxList<AllStickerResponseModel> stickerList = <AllStickerResponseModel>[].obs;
+  // RxList<AllStickerResponseModel> stickerList = <AllStickerResponseModel>[].obs;
   //RxList<AllStickerResponseModel> filteredList = <AllStickerResponseModel>[].obs;
-  RxBool isStickerLoading = false.obs;
+
   int currentPage = 1;
   final int itemsPerPage = 10;
   bool hasMoreData = true;
@@ -350,8 +350,8 @@ class AllStickerController extends GetxController {
   }
   //
   // ///============== Sticker List =================<>
-  // RxList<AllStickerResponseModel> stickerList = <AllStickerResponseModel>[].obs;
-//  RxBool isStickerLoading = false.obs;
+  RxList<AllStickerResponseModel> stickerList = <AllStickerResponseModel>[].obs;
+ RxBool isStickerLoading = false.obs;
   var filteredList = <AllStickerResponseModel>[].obs;
   getAllSticker() async {
     isStickerLoading(true);
@@ -405,9 +405,9 @@ class AllStickerController extends GetxController {
   /// Method to search/filter data
   searchStickerData(String query) {
     if (query.isEmpty) {
-      filteredList.value = stickerList;
+      stickerList.value = filteredList;
     } else {
-      filteredList.value = stickerList
+      stickerList.value = filteredList
           .where((item) => item.name.toString().toLowerCase().contains(query.toLowerCase()))
           .toList();
     }
@@ -437,11 +437,13 @@ class AllStickerController extends GetxController {
   RxList<MyPmojiResponseModel> myPmojiList = <MyPmojiResponseModel>[].obs;
   RxBool isMyPmojiLoading = false.obs;
   Future<void> getAllMyPmoji() async {
+    myPmojiList.clear();
     isMyPmojiLoading(true);
     var response = await ApiClient.getData(ApiConstants.allMyPmojiEndPoint);
     print("===========myPmoji${response.body}");
     if (response.statusCode == 200 || response.statusCode == 201) {
       var responseData = response.body;
+
       myPmojiList.value = List<MyPmojiResponseModel>.from(
         responseData['data'].map(
               (element) => MyPmojiResponseModel.fromJson(element),

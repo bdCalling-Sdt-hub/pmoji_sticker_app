@@ -466,7 +466,7 @@ class HomeScreen extends StatelessWidget {
                           containerHeight: 25.h,
                           containerWidth: 25.w,
                           loadedColor: AppColors.primaryColor))
-                      : allStickerController.filteredList.isEmpty ? Center(child: CustomText(text: "No Data Available",),):
+                      : allStickerController.stickerList.isEmpty ? Center(child: CustomText(text: "No Data Available",),):
                   GridView.builder(
                     controller: scrollController,
                     shrinkWrap: true,
@@ -477,14 +477,13 @@ class HomeScreen extends StatelessWidget {
                       crossAxisSpacing: 10.0, // Space between columns
                       mainAxisSpacing: 20.0, // Space between rows
                     ),
-                    itemCount: allStickerController.filteredList.length +
-                        (allStickerController.isStickerLoading.value && allStickerController.hasMoreData ? 1 : 0),
+                    itemCount: allStickerController.stickerList.length ,
                     itemBuilder: (context, index) {
                       var sticker = allStickerController
-                          .filteredList[index];
+                          .stickerList[index];
                       print("length :===========${allStickerController
-                          .filteredList.length}");
-                      if(index == allStickerController.filteredList.length){
+                          .stickerList.length}");
+                      if(index == allStickerController.stickerList.length){
                         return CircularProgressIndicator();
                       }
                       return InkWell(
