@@ -40,7 +40,7 @@ class EmailVerifyScreen extends StatelessWidget {
                     CustomText(text: AppString.dontGetCode,fontsize: 18.sp,),
                     InkWell(
                         onTap: (){
-                          authController.resendOTP("${Get.parameters['email']}");
+                          authController.resendOTP(authController.emailController.text);
                         },
                         child: CustomText(text: "Resend",fontsize: 18.sp,color: AppColors.primaryColor,)),
                   ],
