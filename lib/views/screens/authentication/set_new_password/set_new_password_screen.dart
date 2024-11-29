@@ -69,11 +69,13 @@ class SetNewPasswordScreen extends StatelessWidget {
                     },
                   ),
                   SizedBox(height: 24.h,),
+                  Obx(()=>
                   CustomButtonCommon(
-                    loading: authController.resendLoading.value,
-                    title: AppString.setPassButton, onpress: (){
-                      authController.resetPassword(passController.text, secondPassController.text);
-                  },),
+                      loading: authController.resendLoading.value,
+                      title: AppString.setPassButton, onpress: (){
+                        authController.resetPassword(passController.text, secondPassController.text);
+                    },),
+                  ),
                 ],
               ),
             ),

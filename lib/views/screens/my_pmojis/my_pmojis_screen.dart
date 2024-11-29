@@ -65,27 +65,30 @@ class MyPmojisScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             var myPmoji = myPmojiController.myPmojiList[index];
             print(myPmoji.name);
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomImageContainer(imagePath: "${myPmoji.image?.publicFileURL}", isNetworkImage: true,imageBoxFit: BoxFit.cover,imageWidth: 134.w,height: 134.h,boxShape: BoxShape.rectangle,),
-                SizedBox(height: 12.h),
-                CustomText(text: myPmoji.name ?? "N/A", fontsize: 16.sp,textAlign: TextAlign.center,textHeight: 10.h,),
-                SizedBox(height: 4.h),
-                Obx(()=>
-                    CustomButtonCommon(
-                      loading: myPmojiController.isSingleStickerLoading.value,
-                      title: " Download", width: 120.w, onpress: (){
-                      myPmojiController.downloadImage(imageUrl: "${ApiConstants.imageBaseUrl}${myPmojiController.myPmojiList[index].image?.publicFileURL}");
-                      // wishlistController.downloadStickerWithId(allStickerController.singleSticker.value.id.toString());
-                      // allStickerController.downloadGallery()
-                    },),
-                ),
+            return SizedBox(
+              height: 400.h,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomImageContainer(imagePath: "${myPmoji.image?.publicFileURL}", isNetworkImage: true,imageBoxFit: BoxFit.cover,imageWidth: 134.w,height: 124.h,boxShape: BoxShape.rectangle,),
+                  SizedBox(height: 12.h),
+                  CustomText(text: myPmoji.name ?? "N/A", fontsize: 16.sp,textAlign: TextAlign.center,textHeight: 10.h,),
+                  SizedBox(height: 4.h),
+                  Obx(()=>
+                      CustomButtonCommon(
+                        loading: myPmojiController.isSingleStickerLoading.value,
+                        title: " Download", width: 120.w, onpress: (){
+                        myPmojiController.downloadImage(imageUrl: "${ApiConstants.imageBaseUrl}${myPmojiController.myPmojiList[index].image?.publicFileURL}");
+                        // wishlistController.downloadStickerWithId(allStickerController.singleSticker.value.id.toString());
+                        // allStickerController.downloadGallery()
+                      },),
+                  ),
 
 
 
 
-              ],
+                ],
+              ),
             );
           },
                 ),

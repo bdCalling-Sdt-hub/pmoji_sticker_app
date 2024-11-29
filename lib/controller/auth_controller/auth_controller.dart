@@ -173,7 +173,7 @@ resendOTP(String email) async{
   var body = {"email": email};
   print(body['email']);
   var response = await ApiClient.postData(
-    ApiConstants.resendOtpEndPoint,
+    "${ApiConstants.resendOtpEndPoint}?email=$email",
     jsonEncode(body),
     headers: headers
   );
@@ -181,6 +181,9 @@ resendOTP(String email) async{
   if(response.statusCode == 200 || response.statusCode == 201){
     ToastMessageHelper.successMessageShowToster(response.body['message']);
     resendLoading(false);
+  }else{
+    resendLoading(false);
+    ToastMessageHelper.errorMessageShowToster(response.body['message']);
   }
 }
 
