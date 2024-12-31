@@ -116,7 +116,7 @@ loginHandle(String email, String password) async{
        await PrefsHelper.setString(AppConstants.email, email);
        await PrefsHelper.setString(AppConstants.userId, data['user']['id']);
        await PrefsHelper.setString(AppConstants.userName, data['user']['name']);
-       Get.toNamed(AppRoutes.bottomBarScreen,);
+       Get.toNamed(AppRoutes.bottomBarScreen,preventDuplicates: false);
        ToastMessageHelper.successMessageShowToster(response.body['message']);
        loadingLoading(false);
      }else{
