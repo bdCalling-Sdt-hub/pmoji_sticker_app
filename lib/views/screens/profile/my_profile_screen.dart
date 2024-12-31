@@ -217,6 +217,7 @@ class MyProfileScreen extends StatelessWidget {
                                                   await PrefsHelper.remove(AppConstants.image);
                                                   await PrefsHelper.remove(AppConstants.email);
                                                   await PrefsHelper.remove(AppConstants.isLogged);
+                                                  await PrefsHelper.remove(AppConstants.bearerToken);
                                                   Get.offNamed(
                                                       AppRoutes.loginScreen);
                                                 })),

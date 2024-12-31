@@ -25,7 +25,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3),() async{
-      Get.toNamed(AppRoutes.onboardingScreen);
+      var  token = await PrefsHelper.getString(AppConstants.bearerToken);
+      if(token != "" && token != null){
+        Get.toNamed(AppRoutes.bottomBarScreen,preventDuplicates: false);
+      }else{
+        Get.toNamed(AppRoutes.onboardingScreen,preventDuplicates: false);
+      }
 
     });
   }
