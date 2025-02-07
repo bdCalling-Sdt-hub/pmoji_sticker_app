@@ -53,10 +53,19 @@ dependencies:
   path_provider: ^2.1.4
   open_file: ^3.5.7
   timeago: ^3.7.0
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/appLogo.png"
+  adaptive_icon_background: "#1D7151"
+  adaptive_icon_foreground: "assets/logo_foreground.png"
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
