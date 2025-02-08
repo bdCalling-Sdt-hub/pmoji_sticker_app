@@ -47,7 +47,7 @@ class AppRoutes {
          GetPage(name: pmojisCartScreen, page: () =>   PmojisCartScreen()),
          GetPage(name: myProfileScreen, page: () =>   MyProfileScreen()),
          GetPage(name: myEditProfileScreen, page: () => ProfileEditScreen()),
-         GetPage(name: settingsScreen, page: () => const SettingsScreen()),
+         GetPage(name: settingsScreen, page: () =>  SettingsScreen()),
          GetPage(name: changePassScreen, page: () =>  ChangePasswordScreen()),
          GetPage(name: privacyPolicyScreen, page: () =>  PrivacyScreen()),
          GetPage(name: aboutScreen, page: () =>  AboutScreen()),
