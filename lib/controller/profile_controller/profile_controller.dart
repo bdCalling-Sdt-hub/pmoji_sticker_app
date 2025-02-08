@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:stripe_payments/routes/app_routes.dart';
 
 import '../../helpers/helpers.dart';
 import '../../models/models.dart';
@@ -238,6 +239,39 @@ class ProfileController extends GetxController {
       isAbout(false);
     }
   }
+
+  ///=================Change Password===================
+  RxBool deleteAccLoading = false.obs;
+  deleteAccount() async {
+    deleteAccLoading(true);
+    String token = await PrefsHelper.getString(AppConstants.bearerToken);
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    var body = {
+      // "oldPassword": '$oldPass',
+      // "newPassword": '$newPass',
+      // "confirmPassword": '$conPass',
+    };
+    var response = await ApiClient.postData(
+        "/user/account-delete", jsonEncode(body),
+        headers: headers
+    );
+
+    print("=======>cDelete Acc:: ${response.body}");
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Get.offNamed(
+          AppRoutes.loginScreen);
+      ToastMessageHelper.successMessageShowToster(response.body['message'].toString());
+      deleteAccLoading(false);
+    }else{
+      ToastMessageHelper.errorMessageShowToster(response.body['message'].toString());
+      deleteAccLoading(false);
+    }
+  }
+
 
 
 

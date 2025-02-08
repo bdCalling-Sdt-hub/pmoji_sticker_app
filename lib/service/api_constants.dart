@@ -1,9 +1,9 @@
 
 class ApiConstants{
-  //static const String baseUrl = "http://192.168.10.230:2000/api/v1";
-  static const String baseUrl = "https://pmojis.com/api/v1";
-  static const String imageBaseUrl = "https://pmojis.com";
-  //static const String imageBaseUrl = "http://192.168.10.230:2000";
+  static const String baseUrl = "http://10.0.80.210:7070/api/v1";
+ // static const String baseUrl = "https://pmojis.com/api/v1";
+ // static const String imageBaseUrl = "https://pmojis.com";
+  static const String imageBaseUrl = "http://10.0.80.210:7070/api/v1";
 
   static const String signUpEndPoint = "/user/register";
   static const String signInEndPoint = "/user/login";
