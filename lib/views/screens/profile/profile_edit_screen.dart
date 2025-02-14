@@ -65,9 +65,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     children: [
                       _image != null
                           ? CircleAvatar(
-                          radius: 60.r,
-                          backgroundImage: MemoryImage(_image!))
-                          : userData.information?.image?.publicFileUrl != null
+                          radius: 130.r,
+                          backgroundColor: Colors.grey,
+                          backgroundImage:  MemoryImage(_image!))
+                          : userData.information?.image?.publicFileUrl == null
                           ? CustomImageContainer(
                         height: 134.h,
                         imageWidth: 134.w,
@@ -76,11 +77,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         boxShape: BoxShape.circle,
                         imageBoxFit: BoxFit.cover,
                       )
-                          : Image.asset(
-                        AppImages.profileImage,
+                          : CustomImageContainer(
                         height: 134.h,
-                        width: 134.w,
-                        fit: BoxFit.cover,
+                        imageWidth: 134.w,
+                        isNetworkImage: false,
+                        imagePath: AppImages.profileImage,
+                        boxShape: BoxShape.circle,
+                        imageBoxFit: BoxFit.contain,
                       ),
                       Positioned(
                         top: 68.h,
@@ -112,6 +115,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     child: SvgPicture.asset(AppIcons.email, color: AppColors.primaryColor, height: 24.h, width: 24.w),
                   ),
                   hintText: "jane.07@gmail.com",
+
                   keyboardType: TextInputType.none,
                 ),
                 SizedBox(height: 20.h,),
@@ -121,16 +125,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     padding: EdgeInsets.only(left: 16.w, right: 12.w),
                     child: SvgPicture.asset(AppIcons.callIcon, color: AppColors.primaryColor, height: 24.h, width: 24.w),
                   ),
+                  hintextColor:  Colors.grey,
                   hintText: "(406) 555-0120",
                   keyboardType: TextInputType.number,
                 ),
                 SizedBox(height: 20.h,),
                 CustomTextField(
                   controller: locationCtrl,
+
                   prefixIcon: Padding(
                     padding: EdgeInsets.only(left: 16.w, right: 12.w),
                     child: SvgPicture.asset(AppIcons.locationIcon, color: AppColors.primaryColor, height: 24.h, width: 24.w),
                   ),
+                  hintextColor:  Colors.grey,
                   hintText: "2972 Westheimer Rd. Santa Ana, Illinois 85486 ",
                 ),
                 SizedBox(height: 250.h,),

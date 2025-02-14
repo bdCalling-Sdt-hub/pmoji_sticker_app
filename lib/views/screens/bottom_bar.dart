@@ -34,14 +34,14 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       body: _screen.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
-        height: 100.h,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-            // borderRadius: BorderRadius.only(
-            //     topLeft: Radius.circular(24.r),
-            //     topRight: Radius.circular(24.r)
-            // )
-        ),
+        // height: 100.h,
+        // clipBehavior: Clip.antiAlias,
+        // decoration: BoxDecoration(
+        //     // borderRadius: BorderRadius.only(
+        //     //     topLeft: Radius.circular(24.r),
+        //     //     topRight: Radius.circular(24.r)
+        //     // )
+        // ),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[

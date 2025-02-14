@@ -1,4 +1,4 @@
-package com.example.stripe_payments
+package com.pmoji.admin
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
