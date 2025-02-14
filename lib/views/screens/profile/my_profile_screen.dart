@@ -56,22 +56,24 @@ class MyProfileScreen extends StatelessWidget {
                           children: [
 
                             ///------------------------Profile Image----------------------------?>
-                         userData.information?.image?.publicFileUrl == null && userData.information?.image?.publicFileUrl == ""?
-                        CustomImageContainer(
-                          height: 70.h,
-                          imageWidth: 70.w,
-                          isNetworkImage: false,
-                          imagePath: AppImages.profileImage,
-                          boxShape: BoxShape.circle,
-                          imageBoxFit: BoxFit.cover,
-                        ): CustomImageContainer(
-                              height: 70.h,
+                            profileController.getUserDataModel.value.information?.image?.publicFileUrl != null && profileController.getUserDataModel.value.information?.image?.publicFileUrl != ""?
+                            CustomImageContainer(
+                              height: 45.h,
                               imageWidth: 50.w,
                               isNetworkImage: true,
                               imagePath: userData.information?.image?.publicFileUrl,
                               boxShape: BoxShape.circle,
                               imageBoxFit: BoxFit.cover,
-                            ),
+                            ):  CustomImageContainer(
+                              height: 45.h,
+                              imageWidth: 50.w,
+                          isNetworkImage: false,
+                          imagePath: AppImages.profileImage,
+                          boxShape: BoxShape.circle,
+                          imageBoxFit: BoxFit.contain,
+                        )
+
+                             ,
 
                             ///------------------------Profile Name----------------------------?>
                             CustomText(text: userData.information?.name ?? "N/A",

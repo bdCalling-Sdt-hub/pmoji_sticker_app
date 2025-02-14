@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +36,13 @@ void main() async{
   Stripe.publishableKey = Constants.publishAbleKey;
   DependencyInjection di = DependencyInjection();
   di.dependencies();
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  //    const MyApp()
+  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
